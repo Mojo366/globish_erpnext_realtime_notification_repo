@@ -1,9 +1,29 @@
+from . import __version__ as app_version
+
 app_name = "globish_erpnext_realtime_notification"
 app_title = "Globish ERPNext Realtime Notification"
 app_publisher = "Globish"
 app_description = "Addon for ERPNext to publish notification to client users in realtime"
 app_email = "joe.mecksavanh@gmail.com"
 app_license = "mit"
+
+# app_logo_url = "/assets/my_custom_app/images/my_app_logo.svg"
+
+# Document Events
+# -----------------
+# Hook on the "Notification Log" DocType's "on_update" event
+doc_events = {
+    "Notification Log": {
+        # "on_submit": "path.to.your.function",
+        "on_update": "my_custom_app.utils.handle_new_notification_log",
+        # "after_insert": "my_custom_app.utils.handle_new_notification_log_insert" # Alternative
+    }
+}
+
+# Other hooks (scheduler_events, app_include_js, etc.) would go here
+# ... (keep your existing hooks configuration as well)
+
+
 
 # Apps
 # ------------------
@@ -13,11 +33,11 @@ app_license = "mit"
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
-# 		"name": "globish_erpnext_realtime_notification",
-# 		"logo": "/assets/globish_erpnext_realtime_notification/logo.png",
-# 		"title": "Globish ERPNext Realtime Notification",
-# 		"route": "/globish_erpnext_realtime_notification",
-# 		"has_permission": "globish_erpnext_realtime_notification.api.permission.has_app_permission"
+# 		"name": "my_custom_app",
+# 		"logo": "/assets/my_custom_app/logo.png",
+# 		"title": "joes custom app",
+# 		"route": "/my_custom_app",
+# 		"has_permission": "my_custom_app.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -25,15 +45,15 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/globish_erpnext_realtime_notification/css/globish_erpnext_realtime_notification.css"
-# app_include_js = "/assets/globish_erpnext_realtime_notification/js/globish_erpnext_realtime_notification.js"
+# app_include_css = "/assets/my_custom_app/css/my_custom_app.css"
+# app_include_js = "/assets/my_custom_app/js/my_custom_app.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/globish_erpnext_realtime_notification/css/globish_erpnext_realtime_notification.css"
-# web_include_js = "/assets/globish_erpnext_realtime_notification/js/globish_erpnext_realtime_notification.js"
+# web_include_css = "/assets/my_custom_app/css/my_custom_app.css"
+# web_include_js = "/assets/my_custom_app/js/my_custom_app.js"
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "globish_erpnext_realtime_notification/public/scss/website"
+# website_theme_scss = "my_custom_app/public/scss/website"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -51,7 +71,7 @@ app_license = "mit"
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "globish_erpnext_realtime_notification/public/icons.svg"
+# app_include_icons = "my_custom_app/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -75,43 +95,43 @@ app_license = "mit"
 
 # add methods and filters to jinja environment
 # jinja = {
-# 	"methods": "globish_erpnext_realtime_notification.utils.jinja_methods",
-# 	"filters": "globish_erpnext_realtime_notification.utils.jinja_filters"
+# 	"methods": "my_custom_app.utils.jinja_methods",
+# 	"filters": "my_custom_app.utils.jinja_filters"
 # }
 
 # Installation
 # ------------
 
-# before_install = "globish_erpnext_realtime_notification.install.before_install"
-# after_install = "globish_erpnext_realtime_notification.install.after_install"
+# before_install = "my_custom_app.install.before_install"
+# after_install = "my_custom_app.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "globish_erpnext_realtime_notification.uninstall.before_uninstall"
-# after_uninstall = "globish_erpnext_realtime_notification.uninstall.after_uninstall"
+# before_uninstall = "my_custom_app.uninstall.before_uninstall"
+# after_uninstall = "my_custom_app.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
 # To set up dependencies/integrations with other apps
 # Name of the app being installed is passed as an argument
 
-# before_app_install = "globish_erpnext_realtime_notification.utils.before_app_install"
-# after_app_install = "globish_erpnext_realtime_notification.utils.after_app_install"
+# before_app_install = "my_custom_app.utils.before_app_install"
+# after_app_install = "my_custom_app.utils.after_app_install"
 
 # Integration Cleanup
 # -------------------
 # To clean up dependencies/integrations with other apps
 # Name of the app being uninstalled is passed as an argument
 
-# before_app_uninstall = "globish_erpnext_realtime_notification.utils.before_app_uninstall"
-# after_app_uninstall = "globish_erpnext_realtime_notification.utils.after_app_uninstall"
+# before_app_uninstall = "my_custom_app.utils.before_app_uninstall"
+# after_app_uninstall = "my_custom_app.utils.after_app_uninstall"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "globish_erpnext_realtime_notification.notifications.get_notification_config"
+# notification_config = "my_custom_app.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -150,39 +170,39 @@ app_license = "mit"
 
 # scheduler_events = {
 # 	"all": [
-# 		"globish_erpnext_realtime_notification.tasks.all"
+# 		"my_custom_app.tasks.all"
 # 	],
 # 	"daily": [
-# 		"globish_erpnext_realtime_notification.tasks.daily"
+# 		"my_custom_app.tasks.daily"
 # 	],
 # 	"hourly": [
-# 		"globish_erpnext_realtime_notification.tasks.hourly"
+# 		"my_custom_app.tasks.hourly"
 # 	],
 # 	"weekly": [
-# 		"globish_erpnext_realtime_notification.tasks.weekly"
+# 		"my_custom_app.tasks.weekly"
 # 	],
 # 	"monthly": [
-# 		"globish_erpnext_realtime_notification.tasks.monthly"
+# 		"my_custom_app.tasks.monthly"
 # 	],
 # }
 
 # Testing
 # -------
 
-# before_tests = "globish_erpnext_realtime_notification.install.before_tests"
+# before_tests = "my_custom_app.install.before_tests"
 
 # Overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "globish_erpnext_realtime_notification.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "my_custom_app.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-# 	"Task": "globish_erpnext_realtime_notification.task.get_dashboard_data"
+# 	"Task": "my_custom_app.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -196,13 +216,13 @@ app_license = "mit"
 
 # Request Events
 # ----------------
-# before_request = ["globish_erpnext_realtime_notification.utils.before_request"]
-# after_request = ["globish_erpnext_realtime_notification.utils.after_request"]
+# before_request = ["my_custom_app.utils.before_request"]
+# after_request = ["my_custom_app.utils.after_request"]
 
 # Job Events
 # ----------
-# before_job = ["globish_erpnext_realtime_notification.utils.before_job"]
-# after_job = ["globish_erpnext_realtime_notification.utils.after_job"]
+# before_job = ["my_custom_app.utils.before_job"]
+# after_job = ["my_custom_app.utils.after_job"]
 
 # User Data Protection
 # --------------------
@@ -232,7 +252,7 @@ app_license = "mit"
 # --------------------------------
 
 # auth_hooks = [
-# 	"globish_erpnext_realtime_notification.auth.validate"
+# 	"my_custom_app.auth.validate"
 # ]
 
 # Automatically update python controller files with type annotations for this app.

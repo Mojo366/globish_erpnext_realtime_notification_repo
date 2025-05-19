@@ -1,0 +1,20 @@
+include README.md
+include license.txt
+include requirements.txt
+
+graft globish_erpnext_realtime_notification/config
+graft globish_erpnext_realtime_notification/doctype
+graft globish_erpnext_realtime_notification/page
+graft globish_erpnext_realtime_notification/report
+graft globish_erpnext_realtime_notification/web_form
+graft globish_erpnext_realtime_notification/notification
+graft globish_erpnext_realtime_notification/print_format
+graft globish_erpnext_realtime_notification/public
+graft globish_erpnext_realtime_notification/templates
+
+include globish_erpnext_realtime_notification/patches.txt
+include globish_erpnext_realtime_notification/modules.txt # if you use it
+include globish_erpnext_realtime_notification/version.txt
+
+# Include .gitkeep files if you want to ensure empty directories are created
+# recursive-include my_erpnext_addon *.gitkeep

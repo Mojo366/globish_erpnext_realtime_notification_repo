@@ -1,0 +1,3 @@
+# Example:
+# requests>=2.20.0
+# beautifulsoup4
