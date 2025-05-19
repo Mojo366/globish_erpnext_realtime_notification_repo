@@ -15,7 +15,7 @@ app_license = "mit"
 doc_events = {
     "Notification Log": {
         # "on_submit": "path.to.your.function",
-        "on_update": "my_custom_app.utils.handle_new_notification_log",
+        "on_update": "globish_erpnext_realtime_notification.utils.handle_new_notification_log",
         # "after_insert": "my_custom_app.utils.handle_new_notification_log_insert" # Alternative
     }
 }
