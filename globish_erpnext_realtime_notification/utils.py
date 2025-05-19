@@ -17,18 +17,11 @@ def handle_new_notification_log(doc, method):
     frappe.log_error('my custom app works!')
     if doc.for_user: # Ensure there's a user to send the notification to
         try:
-            frappe.publish_realtime(
-                event='msgprint', # Standard event for Frappe's msgprint
-                message=f"New Notification: {doc.subject or 'Check your notifications!'}", # Customize your message
-                user=doc.for_user,
-                doctype_name=doc.document_type, # Optional: send doctype name
-                doc_name=doc.document_name # Optional: send doc name
-            )
-            frappe.logger().info(f"Realtime message published for user {doc.for_user} for Notification Log {doc.name}")
+            frappe.publish_realtime(event='msgprint',message=doc.subject,user=doc.for_user);
         except Exception as e:
-            frappe.logger().error(f"Failed to publish realtime message for Notification Log {doc.name}: {e}")
+            frappe.log_error('except error')
     else:
-        frappe.logger().warning(f"Notification Log {doc.name} does not have a 'for_user' set. No realtime message sent.")
+        frappe.log_error('if doc.for_user not true...')
 
 # If you chose "after_insert" hook instead:
 # def handle_new_notification_log_insert(doc, method):
