@@ -35,3 +35,18 @@ def handle_new_notification_log(doc, method):
             frappe.log_error(title="Custom App Realtime Error", message=str(e))
     else:
         frappe.log_error(title="Custom App Log", message="Notification Log does not have 'for_user' set, not sending realtime alert.")
+
+
+@frappe.whitelist()
+def get_unread_notification_count_for_user(): # Renamed for clarity
+    """
+    Returns the count of unread Notification Log entries for the current session user.
+    """
+    if not frappe.session.user:
+        return 0
+    
+    count = frappe.db.count('Notification Log', {
+        'for_user': frappe.session.user,
+        'read': 0
+    })
+    return count
