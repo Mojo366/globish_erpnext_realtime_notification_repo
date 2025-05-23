@@ -17,7 +17,7 @@ def handle_new_notification_log(doc, method):
                 # 'title': "Notification Title" # Optional title for the alert
             }
             # Duration for the alert (in seconds)
-            alert_duration = 5
+            alert_duration = 15
 
             # Publish a custom event. The 'message' here will be received as 'data' by the client-side handler.
             # We'll also send the duration separately or include it in the payload.
