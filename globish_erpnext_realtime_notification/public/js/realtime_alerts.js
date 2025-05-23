@@ -53,8 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
                        let unread_count = parseInt(r.message);
                        console.log("Globish Realtime: Initial unread notification count:", unread_count);
                        if (unread_count > 0) {
-
-
                            let message_text;
                            if (unread_count === 1) {
                                message_text = `${unread_count} ${__("unread notification")}`;
@@ -63,8 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
                            }
                            // Or simpler if you don't need to translate "unread notification(s)" separately:
                            // message_text = __(`${unread_count} unread notification(s)`);
-
-
                            frappe.show_alert({
                                message: message_text,
                                indicator: 'orange',
