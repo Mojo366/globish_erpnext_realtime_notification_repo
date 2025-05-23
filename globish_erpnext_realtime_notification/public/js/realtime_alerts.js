@@ -51,10 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                        let unread_count = parseInt(r.message);
                        console.log("Globish Realtime: Initial unread notification count:", unread_count);
                        if (unread_count > 0) {
-                           // Use JavaScript template literal for string construction
-                           // and wrap the whole thing with __() for translation if the entire phrase needs it.
-                           // If only parts are translatable, __() would be used on those parts.
-                           // For "{X} unread notifications", often "unread notifications" is the part to translate.
+
 
                            let message_text;
                            if (unread_count === 1) {
