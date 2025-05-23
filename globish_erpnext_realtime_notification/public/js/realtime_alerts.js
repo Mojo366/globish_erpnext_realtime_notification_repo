@@ -1,3 +1,5 @@
+// latest ver
+
 document.addEventListener('DOMContentLoaded', function() {
     function setupRealtimeListener() {
         if (
