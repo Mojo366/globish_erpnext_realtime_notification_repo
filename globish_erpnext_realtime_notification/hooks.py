@@ -6,8 +6,7 @@ app_publisher = "Globish"
 app_description = "Addon for ERPNext to publish notification to client users in realtime"
 app_email = "joe.mecksavanh@gmail.com"
 app_license = "mit"
-
-app_include_js = "/assets/globish_erpnext_realtime_notification/js/realtime_alerts2.js"
+app_include_js = ["/assets/globish_erpnext_realtime_notification/js/realtime_alerts.js"]
 # Document Events
 # -----------------
 # Hook on the "Notification Log" DocType's "on_update" event
