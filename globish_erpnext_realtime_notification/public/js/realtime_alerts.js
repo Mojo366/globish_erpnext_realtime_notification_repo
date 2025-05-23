@@ -43,31 +43,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fetchAndShowUnreadNotificationsSummary() {
-        console.log("Globish Realtime: Checking for initially unread notifications for user:", frappe.session.user);
-        frappe.call({
-            // Use your app's whitelisted method
-            method: "globish_erpnext_realtime_notification.utils.get_unread_notification_count_for_user",
-            // No args needed as it uses frappe.session.user internally
-            callback: function(r) {
-                // r.message should directly be the count
-                if (r && typeof r.message !== 'undefined') {
-                    let unread_count = parseInt(r.message); // Ensure it's a number
-                    console.log("Globish Realtime: Initial unread notification count:", unread_count);
-                    if (unread_count > 0) {
-                        frappe.show_alert({
-                            message: frappe.format(__("{0} unread notification(s)"), [unread_count]),
-                            indicator: 'orange', 
-                        }, 5);
-                    }
-                } else {
-                    console.error("Globish Realtime: Failed to fetch initial unread notification count or no count returned.", r);
-                }
-            },
-            error: function(err) {
-                console.error("Globish Realtime: Error fetching initial unread notification count:", err);
-            }
-        });
-    }
+           console.log("Globish Realtime: Checking for initially unread notifications for user:", frappe.session.user);
+           frappe.call({
+               method: "globish_erpnext_realtime_notification.utils.get_unread_notification_count_for_user",
+               callback: function(r) {
+                   if (r && typeof r.message !== 'undefined') {
+                       let unread_count = parseInt(r.message);
+                       console.log("Globish Realtime: Initial unread notification count:", unread_count);
+                       if (unread_count > 0) {
+                           // Use JavaScript template literal for string construction
+                           // and wrap the whole thing with __() for translation if the entire phrase needs it.
+                           // If only parts are translatable, __() would be used on those parts.
+                           // For "{X} unread notifications", often "unread notifications" is the part to translate.
+
+                           let message_text;
+                           if (unread_count === 1) {
+                               message_text = `${unread_count} ${__("unread notification")}`;
+                           } else {
+                               message_text = `${unread_count} ${__("unread notifications")}`;
+                           }
+                           // Or simpler if you don't need to translate "unread notification(s)" separately:
+                           // message_text = __(`${unread_count} unread notification(s)`);
+
+
+                           frappe.show_alert({
+                               message: message_text,
+                               indicator: 'orange',
+                           }, 15);
+                       }
+                   } else {
+                       console.error("Globish Realtime: Failed to fetch initial unread notification count or no count returned.", r);
+                   }
+               },
+               error: function(err) {
+                   console.error("Globish Realtime: Error fetching initial unread notification count:", err);
+               }
+           });
+       }
 
     setupRealtimeListener();
 });
