@@ -7,7 +7,6 @@ app_description = "Addon for ERPNext to publish notification to client users in 
 app_email = "joe.mecksavanh@gmail.com"
 app_license = "mit"
 
-# app_logo_url = "/assets/my_custom_app/images/my_app_logo.svg"
 app_include_js = "/assets/globish_erpnext_realtime_notification/js/realtime_alerts.js"
 # Document Events
 # -----------------
