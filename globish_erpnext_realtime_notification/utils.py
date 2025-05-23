@@ -1,5 +1,3 @@
-# my_custom_app/my_custom_app/utils.py
-
 import frappe
 
 def handle_new_notification_log(doc, method):
@@ -8,25 +6,32 @@ def handle_new_notification_log(doc, method):
     'doc' is the Notification Log document instance.
     'method' is the string representing the event (e.g., "on_update").
     """
-    # frappe.log_error(title="Debug New Notification", message=f"Notification Log: {doc.name}, User: {doc.for_user}, Method: {method}")
+    frappe.log_error(title="Custom App Log", message=f"Handling Notification Log: {doc.name} for User: {doc.for_user}, Method: {method}")
 
-    # Check if the document is new (has not been saved before)
-    # This is a common check for 'on_update' to only act on creation or specific changes.
-    # For Notification Log, 'on_update' fires on creation itself.
-    # You might add more specific conditions if needed, e.g., based on doc.type or doc.subject
-    frappe.log_error('my custom app works!')
-    if doc.for_user: # Ensure there's a user to send the notification to
+    if doc.for_user:
         try:
-            frappe.publish_realtime(event='msgprint',message=doc.subject,user=doc.for_user);
-        except Exception as e:
-            frappe.log_error('except error')
-    else:
-        frappe.log_error('if doc.for_user not true...')
+            # Prepare the payload for frappe.show_alert
+            alert_payload = {
+                'message': doc.subject or "You have a new notification", # Default message if subject is empty
+                'indicator': 'green', # 'green', 'blue', 'orange', 'red'
+                # 'title': "Notification Title" # Optional title for the alert
+            }
+            # Duration for the alert (in seconds)
+            alert_duration = 5
 
-# If you chose "after_insert" hook instead:
-# def handle_new_notification_log_insert(doc, method):
-#     # This function is called only after a new Notification Log is inserted.
-#     if doc.for_user:
-#         frappe.publish_realtime(event='msgprint', message="New notification (from after_insert)!", user=doc.for_user)
-#     else:
-#         frappe.log_error(title="Notification Log Issue", message=f"Notification Log {doc.name} has no for_user.")
+            # Publish a custom event. The 'message' here will be received as 'data' by the client-side handler.
+            # We'll also send the duration separately or include it in the payload.
+            # Let's include it in the payload for cleaner client-side code.
+            alert_payload['duration'] = alert_duration
+
+            frappe.publish_realtime(
+                event='show_custom_globish_alert', # A unique event name for your app
+                message=alert_payload,
+                user=doc.for_user
+            )
+            frappe.log_error(title="Custom App Log", message=f"Published show_custom_globish_alert for {doc.for_user} with payload: {alert_payload}")
+
+        except Exception as e:
+            frappe.log_error(title="Custom App Realtime Error", message=str(e))
+    else:
+        frappe.log_error(title="Custom App Log", message="Notification Log does not have 'for_user' set, not sending realtime alert.")
