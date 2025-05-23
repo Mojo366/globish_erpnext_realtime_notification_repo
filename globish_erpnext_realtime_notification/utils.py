@@ -38,7 +38,7 @@ def handle_new_notification_log(doc, method):
 
 
 @frappe.whitelist()
-def get_unread_notification_count_for_user(): # Renamed for clarity
+def get_unread_notification_count_for_user(): 
     """
     Returns the count of unread Notification Log entries for the current session user.
     """
