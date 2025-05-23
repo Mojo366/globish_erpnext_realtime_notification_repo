@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
             typeof window.__ === 'function' // For translations __()
         ) {
             console.log("Globish Realtime: All Frappe dependencies (realtime, show_alert, __) are ready. Listening for 'show_custom_globish_alert'.");
-
-            frappe.realtime.on('show_custom_globish_alert', function(data) {
+			const eventNameToListen = 'show_custom_globish_alert'
+            frappe.realtime.on(eventNameToListen, function(data) {
                 console.log("Globish Realtime: Received 'show_custom_globish_alert' with data:", data);
 
                 if (data && data.message) {
