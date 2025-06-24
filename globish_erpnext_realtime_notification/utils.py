@@ -6,7 +6,6 @@ def handle_new_notification_log(doc, method):
     'doc' is the Notification Log document instance.
     'method' is the string representing the event (e.g., "on_update").
     """
-    frappe.log_error(title="Custom App Log", message=f"Handling Notification Log: {doc.name} for User: {doc.for_user}, Method: {method}")
 
     if doc.for_user:
         try:
@@ -29,7 +28,6 @@ def handle_new_notification_log(doc, method):
                 message=alert_payload,
                 user=doc.for_user
             )
-            frappe.log_error(title="Custom App Log", message=f"Published show_custom_globish_alert for {doc.for_user} with payload: {alert_payload}")
 
         except Exception as e:
             frappe.log_error(title="Custom App Realtime Error", message=str(e))
